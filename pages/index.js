@@ -11,12 +11,13 @@ export default function Home() {
   };
   const handleTargetCurrency = (e) => {
     setTargetCurrency(e.target.value);
-    fetch("/api/convert", {
-      method: "POST",
-      body: JSON.stringify({
-        currency,
-        targetCurrency,
-      }),
+    fetch(
+      `https://api.currconv.com/api/v7/convert?q=${currency}_${targetCurrency}&compact=ultra&apiKey=b5939a986a2b839e0797`,
+      {
+        method: "POST",
+      }
+    ).then((response) => {
+      console.log(response);
     });
   };
   return (
