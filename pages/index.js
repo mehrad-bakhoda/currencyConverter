@@ -4,6 +4,7 @@ import superjson from "superjson";
 
 export default function Home({ data }) {
   const [amount, setAmount] = useState(20);
+  const [resultAmount, setResultAmount] = useState();
   const [currency, setCurrency] = useState("");
   const [targetCurrency, setTargetCurrency] = useState("");
 
@@ -27,7 +28,9 @@ export default function Home({ data }) {
       requestOptions
     )
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        setResultAmount(result.result);
+      })
       .catch((error) => console.log("error", error));
   };
   return (
@@ -37,7 +40,12 @@ export default function Home({ data }) {
           <h1>Currency Converter</h1>
         </div>
         <div className={styles.wrapper}>
-          <input />
+          <input
+            value={amount}
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
+          />
           <select name="currency" onChange={handleCurrency}>
             {Object.keys(data.symbols).map(function (key) {
               return <option value={`${key}`}>{data.symbols[key]}</option>;
@@ -45,7 +53,7 @@ export default function Home({ data }) {
           </select>
         </div>
         <div className={styles.wrapper}>
-          <input className={styles.converted} />
+          <input className={styles.converted} value={resultAmount} />
           <select name="targetCurrency" onChange={handleTargetCurrency}>
             {Object.keys(data.symbols).map(function (key) {
               return <option value={`${key}`}>{data.symbols[key]}</option>;
