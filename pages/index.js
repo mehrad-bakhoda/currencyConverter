@@ -93,12 +93,7 @@ export async function getServerSideProps() {
     .catch((error) => console.log("error", error));
   return {
     props: {
-      data: {
-        symbols: {
-          BAM: "Bosnia-Herzegovina Convertible Mark",
-          AWG: "Aruban Florin",
-        },
-      },
+      data,
     },
   };
 }
