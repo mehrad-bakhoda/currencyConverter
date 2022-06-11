@@ -39,18 +39,16 @@ export default function Home({ data }) {
         <div className={styles.wrapper}>
           <input />
           <select name="currency" onChange={handleCurrency}>
-            {data.symbols.map((symbol) => {
-              <option value={`${symbol}`}>United States Dollars</option>;
-              console.log(symbol);
+            {Object.keys(data.symbols).map(function (key) {
+              return <option value={`${key}`}>{data.symbols[key]}</option>;
             })}
           </select>
         </div>
         <div className={styles.wrapper}>
           <input className={styles.converted} />
           <select name="targetCurrency" onChange={handleTargetCurrency}>
-            {data.symbols.map((symbol) => {
-              <option value={`${symbol}`}>United States Dollars</option>;
-              console.log(symbol);
+            {Object.keys(data.symbols).map(function (key) {
+              return <option value={`${key}`}>{data.symbols[key]}</option>;
             })}
           </select>
         </div>
@@ -59,6 +57,9 @@ export default function Home({ data }) {
   );
 }
 export async function getServerSideProps() {
+  // this is just for presentation and its obviously not optimal to get the currency
+  //  list every time that application runs
+
   var myHeaders = new Headers();
   myHeaders.append("apikey", "HxjEX0NL6JlbRnPXMnKeIkgL4jFMw1sS");
 
@@ -77,7 +78,12 @@ export async function getServerSideProps() {
     .catch((error) => console.log("error", error));
   return {
     props: {
-      data: data,
+      data: {
+        symbols: {
+          BAM: "Bosnia-Herzegovina Convertible Mark",
+          AWG: "Aruban Florin",
+        },
+      },
     },
   };
 }
