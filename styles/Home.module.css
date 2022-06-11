@@ -27,15 +27,9 @@
   color: inherit;
   border: 5px solid powderblue;
   border-radius: 22px;
-  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: red;
-  border-color: red;
-}
+
 
 
 

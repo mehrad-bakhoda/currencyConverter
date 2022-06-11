@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
-import superjson from "superjson";
 
 export default function Home({ data }) {
   const [amount, setAmount] = useState(20);
@@ -48,7 +47,11 @@ export default function Home({ data }) {
           />
           <select name="currency" onChange={handleCurrency}>
             {Object.keys(data.symbols).map(function (key) {
-              return <option value={`${key}`}>{data.symbols[key]}</option>;
+              return (
+                <option key={key} value={`${key}`}>
+                  {data.symbols[key]}
+                </option>
+              );
             })}
           </select>
         </div>
@@ -56,7 +59,11 @@ export default function Home({ data }) {
           <input className={styles.converted} value={resultAmount} />
           <select name="targetCurrency" onChange={handleTargetCurrency}>
             {Object.keys(data.symbols).map(function (key) {
-              return <option value={`${key}`}>{data.symbols[key]}</option>;
+              return (
+                <option key={key} value={`${key}`}>
+                  {data.symbols[key]}
+                </option>
+              );
             })}
           </select>
         </div>
